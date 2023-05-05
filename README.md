@@ -1,3 +1,12 @@
+# Tutorial
+Run main.py file. It will generate 3 names using different language models: Bigram, Trigram, Ngram. You can also run scripts individually from the Models folder. Each script generates 10 names based on its own logic.
+
+Graphs and table of propabity according to dataset is located in Graphs.ipynb. I used matplotlib and pandas libraries to generate graphs.
+
+Example:
+This graph shows what is the most likely letter to come after the letter "a".
+![image](https://user-images.githubusercontent.com/110660562/236516187-7960e8fa-c92f-4205-a1b3-63309160e46f.png)
+
 
 # Simple Language-Models
 There you can see simple realization of Languge models based on statistic
