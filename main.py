@@ -1,8 +1,8 @@
-from BigramModel import read_data, BigramLanguageModel, create_bigram_model
-from TrigramModel import TrigramLanguageModel, create_trigram_model
-from NgramModel import NgramLanguageModel, create_ngram_model
+from Models.BigramModel import read_data, BigramLanguageModel, create_bigram_model
+from Models.TrigramModel import TrigramLanguageModel, create_trigram_model
+from Models.NgramModel import NgramLanguageModel, create_ngram_model
 
-URL: str = 'names.txt'
+URL: str = 'datasets/names.txt'
 
 
 def main():

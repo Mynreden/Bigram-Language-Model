@@ -36,3 +36,14 @@ class LanguageModel:
                     data[i] = 0
             result[char] = sorted(list(data.items()), key=lambda x: x[0])
         return result
+
+
+def read_data(url: str) -> list:
+    names = []
+    with open(url, 'r') as file:
+        a = file.readline()
+        while a:
+            names.append('^' + a.replace('\n', '$'))
+            a = file.readline()
+    return names
+

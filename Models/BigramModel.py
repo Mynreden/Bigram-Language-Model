@@ -1,21 +1,13 @@
 import random
 import pandas
 import matplotlib.pyplot as plt
-from Models.LanguageMidel import LanguageModel
+from Models.LanguageMidel import LanguageModel, read_data
+
+
 MIN_LENGTH: int = 3
 MAX_LENGHT: int = 8
 ALPHABET: str = 'abcdefghijklmnopqrstuvwxyz'
-URL: str = 'names.txt'
-
-
-def read_data(url: str) -> list:
-    names = []
-    with open(url, 'r') as file:
-        a = file.readline()
-        while a:
-            names.append('^' + a.replace('\n', '$'))
-            a = file.readline()
-    return names
+URL: str = '../datasets/names.txt'
 
 
 class BigramLanguageModel(LanguageModel):
