@@ -1,10 +1,12 @@
 import random
 import pandas
 import matplotlib.pyplot as plt
-
+from Models.LanguageMidel import LanguageModel
 MIN_LENGTH: int = 3
+MAX_LENGHT: int = 8
 ALPHABET: str = 'abcdefghijklmnopqrstuvwxyz'
 URL: str = 'names.txt'
+
 
 def read_data(url: str) -> list:
     names = []
@@ -16,11 +18,9 @@ def read_data(url: str) -> list:
     return names
 
 
-class LanguageModel:
+class BigramLanguageModel(LanguageModel):
     def __init__(self):
-        self.count: dict = {}
-        self.context: dict = {}
-        self.char_number = 0
+        super(BigramLanguageModel, self).__init__()
 
     def update(self, name: str) -> None:
         bigrams = self.get_bigrams(name)
@@ -45,8 +45,11 @@ class LanguageModel:
         return bigrams
 
     def get_next(self, context: str) -> str:
-        variants = self.context[context]
-        return random.choice(variants)
+        try:
+            variants = self.context[context]
+            return random.choice(variants)
+        except KeyError:
+            return random.choice(list(self.context.keys()))
 
     def generate(self) -> str:
         word = ''
@@ -59,46 +62,26 @@ class LanguageModel:
             word += next
             previous = next
             next = self.get_next(next)
+            if len(word) == MAX_LENGHT:
+                next = '$'
         return word
 
-    def get_probability(self, character: str) -> dict:
-        variants = self.context[character]
-        data = {}
-        for char in variants:
-            if char in data:
-                data[char] += 1
-            else:
-                data[char] = 1
-        data.pop('$')
-        #for key, value in data.items():
-        #    data[key] = round(value / self.char_number, 5)
-        return data
 
-    def get_all_probabilities(self) -> dict:
-        result = {}
-        for char in ALPHABET:
-            data = self.get_probability(char)
-            for i in ALPHABET:
-                if i not in data:
-                    data[i] = 0
-            result[char] = sorted(list(data.items()), key=lambda x:x[0])
-        return result
-
-
-def create_language_model(data: list) -> LanguageModel:
-    model = LanguageModel()
+def create_bigram_model(data: list) -> BigramLanguageModel:
+    model = BigramLanguageModel()
     for name in data:
         model.update(name)
     return model
 
+
 def main() -> None:
     data = read_data(URL)
-    model = create_language_model(data)
-    random.seed(6)
+    model = create_bigram_model(data)
     print('Generating 10 names:')
     for i in range(10):
         name = model.generate()
         print(name)
+
 
 if __name__ == '__main__':
     main()
