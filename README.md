@@ -1,4 +1,7 @@
 # Tutorial
+
+Also you may test telegram bot by link https://t.me/Vxjdvdndhdbdbot
+
 Run main.py file. It will generate 3 names using different language models: Bigram, Trigram, Ngram. You can also run scripts individually from the Models folder. Each script generates 10 names based on its own logic.
 
 Graphs and table of propabity according to dataset is located in Graphs.ipynb. I used matplotlib and pandas libraries to generate graphs.
